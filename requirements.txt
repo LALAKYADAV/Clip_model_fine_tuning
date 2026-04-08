@@ -1,0 +1,189 @@
+# # ══════════════════════════════════════════════════════════════════
+# # requirements.txt  —  IJCB-AFMFR-2026  /  CLIP ViT-L/14 + LoRA FR
+# # ══════════════════════════════════════════════════════════════════
+# #
+# # INSTALL ORDER (critical — do NOT just pip install -r directly):
+# #
+# #   Step 1: pip install torch==2.1.2 torchvision==0.16.2 torchaudio==2.1.2 \
+# #               --index-url https://download.pytorch.org/whl/cu118
+# #
+# #   Step 2: pip install onnxruntime-gpu==1.17.3
+# #
+# #   Step 3: pip install git+https://github.com/openai/CLIP.git
+# #
+# #   Step 4: pip install -r requirements.txt
+# #
+# # ══════════════════════════════════════════════════════════════════
+
+# # ── PyTorch (installed manually in Step 1, listed here for reference) ──
+# torch==2.1.2
+# torchvision==0.16.2
+# torchaudio==2.1.2
+
+# # ── NVIDIA CUDA runtime libs (bundled with torch, no manual install) ──
+# nvidia-cublas-cu11==11.11.3.6
+# nvidia-cuda-nvrtc-cu11==11.8.89
+# nvidia-cuda-runtime-cu11==11.8.89
+# nvidia-cudnn-cu11==8.9.2.26
+
+# # ── ONNX ──────────────────────────────────────────────────────────────
+# onnx==1.16.0
+# onnxruntime-gpu==1.17.3       # GPU inference; use onnxruntime==1.17.3 for CPU-only
+
+# # ── Core scientific ────────────────────────────────────────────────────
+# numpy==1.26.4
+# scipy==1.13.0
+# scikit-learn==1.4.2
+# joblib==1.3.2
+# threadpoolctl==3.4.0
+
+# # ── CLIP dependencies ──────────────────────────────────────────────────
+# ftfy==6.2.0
+# regex==2024.4.16
+# wcwidth==0.2.13
+
+# # ── Image processing ───────────────────────────────────────────────────
+# pillow==10.3.0
+# opencv-python==4.9.0.80
+
+# # ── Logging / monitoring ───────────────────────────────────────────────
+# tensorboard==2.16.2
+# tqdm==4.66.2
+
+# # ── Plotting ───────────────────────────────────────────────────────────
+# matplotlib==3.8.4
+# contourpy==1.2.1
+# cycler==0.12.1
+# fonttools==4.51.0
+# kiwisolver==1.4.5
+# pyparsing==3.1.2
+# python-dateutil==2.9.0.post0
+
+# # ── Misc utilities ─────────────────────────────────────────────────────
+# requests==2.31.0
+# packaging==24.0
+# typing_extensions==4.9.0
+# importlib_resources==6.4.0
+# zipp==3.18.1
+# six==1.16.0
+# sympy==1.12
+# mpmath==1.3.0
+# certifi==2024.2.2
+# charset-normalizer==3.3.2
+# idna==3.7
+# urllib3==2.2.1
+# coloredlogs==15.0.1
+# humanfriendly==10.0
+# flatbuffers==24.3.25
+# protobuf==4.25.3
+
+
+
+# ══════════════════════════════════════════════════════════════════════════════
+# requirements.txt — IJCB-AFMFR-2026 / CLIP ViT-L/14 + LoRA FR
+# ALL versions verified live from PyPI + PyTorch wheel index, April 2026
+# ══════════════════════════════════════════════════════════════════════════════
+#
+# ╔══════════════════════════════════════════════════════════════════════════╗
+# ║  CRITICAL: Run these 4 commands BEFORE pip install -r requirements.txt  ║
+# ╠══════════════════════════════════════════════════════════════════════════╣
+# ║                                                                          ║
+# ║  1. Upgrade pip:                                                         ║
+# ║     python -m pip install --upgrade pip                                  ║
+# ║                                                                          ║
+# ║  2. Install PyTorch (CUDA 11.8) — only 2.6.0+ available now:            ║
+# ║     pip install torch==2.6.0 torchvision==0.21.0 torchaudio==2.6.0 \    ║
+# ║         --index-url https://download.pytorch.org/whl/cu118              ║
+# ║                                                                          ║
+# ║  3. Install ONNX Runtime GPU for CUDA 11.x                               ║
+# ║     (PyPI dropped CUDA 11 builds at ORT v1.19 — use Microsoft feed):    ║
+# ║     pip install onnxruntime-gpu \                                        ║
+# ║         --index-url https://aiinfra.pkgs.visualstudio.com/PublicPackages/║
+# ║         _packaging/onnxruntime-cuda-11/pypi/simple/                     ║
+# ║                                                                          ║
+# ║  4. Install CLIP:                                                        ║
+# ║     pip install git+https://github.com/openai/CLIP.git                  ║
+# ║                                                                          ║
+# ║  5. Then finally run:                                                    ║
+# ║     pip install -r requirements.txt                                      ║
+# ║                                                                          ║
+# ╚══════════════════════════════════════════════════════════════════════════╝
+#
+# NOTE: torch/torchvision/torchaudio are NOT listed below to prevent pip
+# from trying to re-resolve them from PyPI (which will fail for cu118 builds).
+# They are installed via the special wheel index in Step 2 above.
+# ══════════════════════════════════════════════════════════════════════════════
+
+# ── ONNX graph checker (CPU, from PyPI — always available) ────────────────────
+# onnx==1.16.1
+# onnxruntime-gpu==1.24.4
+# # onnx==1.16.2
+# # ── Core scientific stack ──────────────────────────────────────────────────────
+# # numpy <2.0 — torch 2.6 is compatible with numpy 1.x and 2.x,
+# # but CLIP and older torchvision ops are safer on 1.26.x
+# # numpy==1.26.4
+# numpy==2.1.3
+# scipy==1.15.2
+# scikit-learn==1.6.1
+# joblib==1.4.2
+# threadpoolctl==3.6.0
+
+# # ── CLIP text preprocessing dependencies ──────────────────────────────────────
+# ftfy==6.3.1
+# regex==2024.11.6
+# wcwidth==0.2.13
+
+# # ── Image processing ───────────────────────────────────────────────────────────
+# pillow==11.1.0
+# opencv-python==4.10.0.84
+
+# # ── Logging / monitoring ───────────────────────────────────────────────────────
+# tensorboard==2.18.0
+# tqdm==4.67.1
+
+# # ── Plotting ───────────────────────────────────────────────────────────────────
+# matplotlib==3.10.1
+# contourpy==1.3.1
+# cycler==0.12.1
+# fonttools==4.55.3
+# kiwisolver==1.4.7
+# pyparsing==3.2.1
+# python-dateutil==2.9.0.post0
+
+# # ── Misc utilities ─────────────────────────────────────────────────────────────
+# requests==2.32.3
+# packaging==24.2
+# typing_extensions==4.12.2
+# importlib_resources==6.5.2
+# zipp==3.21.0
+# six==1.17.0
+# sympy==1.13.3
+# mpmath==1.3.0
+# certifi==2024.12.14
+# charset-normalizer==3.4.1
+# idna==3.10
+# urllib3==2.3.0
+# coloredlogs==15.0.1
+# humanfriendly==10.0
+# flatbuffers==25.2.10
+# protobuf==5.29.3
+
+
+
+# ── Core (must use versions that have cp313 wheels) ──
+numpy>=2.1.0
+pillow>=11.0.0
+opencv-python>=4.10.0.84
+
+# ── CLIP dependencies ──
+ftfy>=6.3.0
+regex>=2024.11.0
+tqdm>=4.67.0
+
+# ── Logging (optional) ──
+tensorboard>=2.18.0
+
+# ── Utilities ──
+requests>=2.32.0
+packaging>=24.0
+typing_extensions>=4.12.0
